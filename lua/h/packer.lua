@@ -46,12 +46,17 @@ return require('packer').startup(function(use)
 	  {'hrsh7th/cmp-nvim-lua'},     -- Optional
 
 	  -- Snippets
-	  {'L3MON4D3/LuaSnip'},             -- Required
+      {'L3MON4D3/LuaSnip'},             -- Required
 	  {'rafamadriz/friendly-snippets'}, -- Optional
+    }
   }
-}
 
   use('folke/zen-mode.nvim')
   use('laytan/cloak.nvim')
+  use {
+      'akinsho/bufferline.nvim', tag = 'v3.*', 
+      requires = {'nvim-tree/nvim-web-devicons'}
+  }
+
 end)
 
