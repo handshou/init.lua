@@ -45,7 +45,7 @@ D to delete
  
 ## In command mode 
  
-:Ex save + go back to explorer 
+:Ex explorer pane 
 
 :lua ColorMyPencils() 
 
