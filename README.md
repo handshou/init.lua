@@ -28,6 +28,10 @@ LDR-f : format
 
 LDR LDR : so / source 
 
+LDR-zz : zen-mode
+
+LDR-zZ : super-zen-mode
+
 C-p : git search files 
 
 
