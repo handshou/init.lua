@@ -34,10 +34,19 @@ LDR-zZ : super-zen-mode
 
 C-p : git search files 
 
+---
 
 C-f : find project file (not working, check if tmux install missing?) 
 
 C-a-L : return to previous place 
+
+## Fugitive menu
+
+LDR-p : push
+
+LDR-P : pull —rebase
+
+LDR-t : push -u origin
 
 ## Netrw menu
  
@@ -67,6 +76,7 @@ C-a-1 : increment 1 after cursor
 
 C-x-1 : decrement 1 after cursor 
 
+---
 
 1-j : move cursor 1 row down 
 
