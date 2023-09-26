@@ -2,7 +2,7 @@ vim.cmd [[highlight WinSeparator guifg=#4e545c guibg=None]]
 require('lualine').setup {
   options = {
     icons_enabled = true,
-    theme = 'gruvbox',
+    theme = 'tokyonight',
     component_separators = { left = '', right = ''},
     section_separators = { left = '', right = ''},
     disabled_filetypes = {
