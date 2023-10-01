@@ -51,10 +51,6 @@ return require('packer').startup(function(use)
 
   use('folke/zen-mode.nvim')
   use('laytan/cloak.nvim')
-  use {
-      'akinsho/bufferline.nvim', tag = 'v3.*',
-      requires = {'nvim-tree/nvim-web-devicons'}
-  }
   use({
       "nvim-treesitter/nvim-treesitter-textobjects",
       after = "nvim-treesitter",
