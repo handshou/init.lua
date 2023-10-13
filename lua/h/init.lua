@@ -1,5 +1,6 @@
 require("h.set")
 require("h.remap")
+require("h.lazy")
 
 require("tokyonight").setup({
   on_highlights = function(hl, c)

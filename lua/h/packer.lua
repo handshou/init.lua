@@ -1,35 +1,42 @@
--- This file can be loaded by calling `lua require('plugins')` from your init.vim
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
 
--- Only required if you have packer configured as `opt`
-vim.cmd [[packadd packer.nvim]]
+local plugins = {
+   'wbthomason/packer.nvim',
 
-return require('packer').startup(function(use)
-  -- Packer can manage itself
-  use 'wbthomason/packer.nvim'
-
-  use {
+   {
 	  'nvim-telescope/telescope.nvim', tag = '0.1.1',
 	  -- or                            , branch = '0.1.x',
-	  requires = { {'nvim-lua/plenary.nvim'} }
-  }
+	  dependencies = { {'nvim-lua/plenary.nvim'} }
+  },
 
-  use('folke/tokyonight.nvim')
+  'folke/tokyonight.nvim',
 
-  use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
-  use('nvim-treesitter/playground')
-  use('theprimeagen/harpoon')
-  use('mbbill/undotree')
-  use('tpope/vim-fugitive')
-  use("nvim-treesitter/nvim-treesitter-context");
+  'nvim-treesitter/nvim-treesitter', build = ':TSUpdate',
+  'nvim-treesitter/playground',
+  'theprimeagen/harpoon',
+  'mbbill/undotree',
+  'tpope/vim-fugitive',
+  "nvim-treesitter/nvim-treesitter-context",
 
-  use {
+   {
 	  'VonHeikemen/lsp-zero.nvim',
 	  branch = 'v1.x',
-	  requires = {
+	  dependencies = {
 		  -- LSP Support
 		  {'neovim/nvim-lspconfig'},             -- Required
 		  {'williamboman/mason.nvim',
-		  run = function()
+		  build = function()
 			  pcall(vim.cmd, 'MasonUpdate')
 		  end,
 	  },
@@ -46,20 +53,22 @@ return require('packer').startup(function(use)
 	  -- Snippets
       {'L3MON4D3/LuaSnip'},             -- Required
 	  {'rafamadriz/friendly-snippets'}, -- Optional
-    }
-  }
+    },
+  },
 
-  use('folke/zen-mode.nvim')
-  use('laytan/cloak.nvim')
-  use({
+  'folke/zen-mode.nvim',
+  'laytan/cloak.nvim',
+  {
       "nvim-treesitter/nvim-treesitter-textobjects",
       after = "nvim-treesitter",
-      requires = "nvim-treesitter/nvim-treesitter",
-  })
-  use {
+      dependencies = "nvim-treesitter/nvim-treesitter",
+  },
+   {
       'nvim-lualine/lualine.nvim',
-      requires = { 'nvim-tree/nvim-web-devicons', opt = true }
-  }
+      dependencies = { 'nvim-tree/nvim-web-devicons', opt = true }
+  },
+}
 
-end)
+vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappings are correct
 
+require("lazy").init(plugins, {})
