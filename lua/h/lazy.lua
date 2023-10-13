@@ -96,7 +96,34 @@ local plugin = {
           -- "rcarriga/nvim-notify",
       },
       opts = {
-          -- configuration goes here
+          domain = "com", -- For now "com" is the only one supported
+
+          arg = "leetcode.nvim",
+
+          lang = "javascript",
+
+          sql = "postgresql",
+
+          ---@type string
+          directory = vim.fn.stdpath("data") .. "/leetcode/",
+
+          ---@type boolean
+          logging = true,
+
+          console = {
+              ---@type boolean
+              open_on_runcode = false,
+
+              size = {
+                  width = "75%", ---@type string | integer
+                  height = "75%", ---@type string | integer
+              },
+              dir = "row", ---@type "col" | "row"
+          },
+
+          description = {
+              width = "40%", ---@type string | integer
+          },
       },
   }
 }
