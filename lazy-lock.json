@@ -9,7 +9,7 @@
   "fine-cmdline.nvim": { "branch": "main", "commit": "ead2b85e455eacde10469a8fcf1a717822d2bb9a" },
   "friendly-snippets": { "branch": "main", "commit": "43727c2ff84240e55d4069ec3e6158d74cb534b6" },
   "harpoon": { "branch": "master", "commit": "c1aebbad9e3d13f20bedb8f2ce8b3a94e39e424a" },
-  "lazy.nvim": { "branch": "main", "commit": "e15dfab3c3729af6e54df2828c82db9698ba2c0a" },
+  "lazy.nvim": { "branch": "main", "commit": "276e572f645430bcfd6fd25faa301ea9077f6ab1" },
   "leetcode.nvim": { "branch": "master", "commit": "b8082599f3d9a19d507592956d0ebc7001345e3a" },
   "lsp-zero.nvim": { "branch": "v1.x", "commit": "60b0e84f3793f7e8bcc9ec52f9c239fd497b2cd2" },
   "lualine.nvim": { "branch": "master", "commit": "45e27ca739c7be6c49e5496d14fcf45a303c3a63" },
