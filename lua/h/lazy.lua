@@ -42,13 +42,13 @@ local plugin = {
 	  branch = 'v1.x',
 	  dependencies = {
 		  -- LSP Support
-		  {'neovim/nvim-lspconfig'},             -- Required
 		  {'williamboman/mason.nvim',
 		  build = function()
 			  pcall(vim.cmd, 'MasonUpdate')
 		  end,
 	  },
 	  {'williamboman/mason-lspconfig.nvim'}, -- Optional
+	  {'neovim/nvim-lspconfig'},             -- Required
 
 	  -- Autocompletion
 	  {'hrsh7th/nvim-cmp'},         -- Required
