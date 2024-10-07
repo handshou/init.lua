@@ -99,6 +99,11 @@ local plugin = {
       },
   },
   {
+      "davidmh/mdx.nvim",
+      config = true,
+      dependencies = {"nvim-treesitter/nvim-treesitter"}
+  },
+  {
       "kawre/leetcode.nvim",
       build = ":TSUpdate html",
       dependencies = {
