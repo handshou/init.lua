@@ -25,7 +25,11 @@ require('lualine').setup {
       {
         'filename',
         file_status = true,
-        path = 1
+        path = 4,
+        shorting_target = 55,
+        symbols = {
+          unnamed = ''
+        }
       }
     },
     lualine_x = {'encoding', 'fileformat', 'filetype'},
