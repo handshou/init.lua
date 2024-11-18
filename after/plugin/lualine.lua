@@ -25,7 +25,7 @@ require('lualine').setup {
       {
         'filename',
         file_status = true,
-        path = 4,
+        path = 2,
         shorting_target = 55,
         symbols = {
           unnamed = ''

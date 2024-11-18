@@ -123,7 +123,7 @@ local plugin = {
 
           arg = "leetcode.nvim",
 
-          lang = "python3",
+          lang = "javascript",
 
           sql = "postgresql",
 
