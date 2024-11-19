@@ -15,6 +15,14 @@ vim.g.mapleader = ' '
 
 local plugin = {
     {
+        "ThePrimeagen/harpoon",
+        branch = "harpoon2",
+        dependencies = {
+          { "nvim-lua/plenary.nvim" },
+          { "nvim-telescope/telescope.nvim" },
+        }
+    },
+    {
         "christoomey/vim-tmux-navigator",
         cmd = {
             "TmuxNavigateLeft",
@@ -50,7 +58,6 @@ local plugin = {
 
   'nvim-treesitter/nvim-treesitter', build = ':TSUpdate',
   'nvim-treesitter/playground',
-  'theprimeagen/harpoon',
   'mbbill/undotree',
   'tpope/vim-fugitive',
   "nvim-treesitter/nvim-treesitter-context",
