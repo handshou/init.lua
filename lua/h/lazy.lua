@@ -14,6 +14,18 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = ' '
 
 local plugin = {
+  "stevearc/conform.nvim",
+    opts = {
+       formatters_by_ft = {
+        lua = { "stylua" },
+        ["javascript"] = { "biome-check" },
+        ["javascriptreact"] = { "biome-check" },
+        ["typescript"] = { "biome-check" },
+        ["typescriptreact"] = { "biome-check" },
+        ["json"] = { "biome-check" },
+        ["css"] = { "biome-check" },
+      },
+    },
     {
         "ThePrimeagen/harpoon",
         branch = "harpoon2",
@@ -67,11 +79,7 @@ local plugin = {
 	  branch = 'v1.x',
 	  dependencies = {
 		  -- LSP Support
-		  {'williamboman/mason.nvim',
-		  build = function()
-			  pcall(vim.cmd, 'MasonUpdate')
-		  end,
-	  },
+		  {'williamboman/mason.nvim'},
 	  {'williamboman/mason-lspconfig.nvim'}, -- Optional
 	  {'neovim/nvim-lspconfig'},             -- Required
 
@@ -87,6 +95,24 @@ local plugin = {
       {'L3MON4D3/LuaSnip'},             -- Required
 	  {'rafamadriz/friendly-snippets'}, -- Optional
     },
+
+     config = function()
+      -- Configure Mason and LSP handlers
+      require("mason").setup()
+      require("mason-lspconfig").setup({
+        ensure_installed = { "biome" },
+      })
+
+      require("mason-lspconfig").setup_handlers({
+        ["biome"] = function()
+          require("lspconfig").biome.setup({
+            cmd = { "biome", "lsp-proxy" },
+            filetypes = { "javascript", "typescript", "json", "css", "scss", "html", "markdown", "yaml" },
+            root_dir = require("lspconfig.util").root_pattern(".biomeconfig.json", "package.json"),
+          })
+        end,
+      })
+    end,
   },
 
   'folke/zen-mode.nvim',
