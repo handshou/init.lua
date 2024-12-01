@@ -14,6 +14,16 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = " "
 
 local plugin = {
+    {
+        'MeanderingProgrammer/render-markdown.nvim',
+        dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
+        -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
+        -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+        ---@module 'render-markdown'
+        ---@type render.md.UserConfig
+
+        opts = {},
+    },
     "stevearc/conform.nvim",
     opts = {
         formatters_by_ft = {
@@ -84,18 +94,18 @@ local plugin = {
             -- LSP Support
             { "williamboman/mason.nvim" },
             { "williamboman/mason-lspconfig.nvim" }, -- Optional
-            { "neovim/nvim-lspconfig" },       -- Required
+            { "neovim/nvim-lspconfig" },             -- Required
 
             -- Autocompletion
-            { "hrsh7th/nvim-cmp" },   -- Required
-            { "hrsh7th/cmp-nvim-lsp" }, -- Required
-            { "hrsh7th/cmp-buffer" }, -- Optional
-            { "hrsh7th/cmp-path" },   -- Optional
+            { "hrsh7th/nvim-cmp" },         -- Required
+            { "hrsh7th/cmp-nvim-lsp" },     -- Required
+            { "hrsh7th/cmp-buffer" },       -- Optional
+            { "hrsh7th/cmp-path" },         -- Optional
             { "saadparwaiz1/cmp_luasnip" }, -- Optional
-            { "hrsh7th/cmp-nvim-lua" }, -- Optional
+            { "hrsh7th/cmp-nvim-lua" },     -- Optional
 
             -- Snippets
-            { "L3MON4D3/LuaSnip" },       -- Required
+            { "L3MON4D3/LuaSnip" },             -- Required
             { "rafamadriz/friendly-snippets" }, -- Optional
         },
 
