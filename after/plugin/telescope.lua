@@ -3,10 +3,16 @@ require('telescope').setup({
         find_files = {
             theme = "ivy"
         }
+    },
+    extensions = {
+        fzf = {}
     }
 })
 
+require('telescope').load_extension('fzf')
+
 local builtin = require('telescope.builtin')
+vim.keymap.set("n", "<leader>pd", builtin.diagnostics, {})
 vim.keymap.set('n', '<leader>pf', builtin.find_files, {})
 vim.keymap.set('n', '<leader>pF', function()
     builtin.find_files({
@@ -24,6 +30,7 @@ vim.keymap.set('n', '<leader>ps', function()
         search = vim.fn.input("Grep > ")
     });
 end)
+vim.keymap.set('n', '<leader>PS', builtin.live_grep, { desc = 'Telescope live grep' })
 vim.keymap.set('n', '<leader>pS', function()
     builtin.grep_string({
         search = vim.fn.input("Grep > "),
@@ -32,3 +39,8 @@ vim.keymap.set('n', '<leader>pS', function()
         end
     });
 end)
+vim.keymap.set('n', '<leader>en', function()
+    builtin.find_files({
+        cwd = vim.fn.stdpath('config')
+    })
+end, {})
