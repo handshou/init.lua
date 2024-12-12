@@ -15,6 +15,9 @@ vim.g.mapleader = " "
 
 local plugin = {
     {
+        "nvim-telescope/telescope-media-files.nvim"
+    },
+    {
         "sphamba/smear-cursor.nvim",
 
         opts = {
