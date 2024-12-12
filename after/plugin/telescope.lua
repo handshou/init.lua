@@ -4,7 +4,11 @@ require('telescope').setup({
             theme = "ivy"
         },
         diagnostics = {
-            theme = "dropdown"
+            theme = "dropdown",
+            layout_config = {
+                width = 0.65,
+                height = 20
+            }
         },
         live_grep = {
             theme = "dropdown"
@@ -26,7 +30,7 @@ require('telescope').setup({
             -- find command (defaults to `fd`)
             find_cmd = "rg"
         }
-    }
+    },
 })
 require('telescope').load_extension('fzf')
 
@@ -44,13 +48,13 @@ vim.keymap.set('n', '<leader>pF', function()
     builtin.find_files(
         require('telescope.themes').get_dropdown(),
         {
-        hidden = true,
-        no_ignore = true,
-        file_ignore_patterns = {
-            "node_modules/.*",
-            ".git/*",
-        }
-    })
+            hidden = true,
+            no_ignore = true,
+            file_ignore_patterns = {
+                "node_modules/.*",
+                ".git/*",
+            }
+        })
 end, {})
 vim.keymap.set('n', '<C-p>', builtin.git_files, {})
 vim.keymap.set('n', '<leader>ps', function()
