@@ -70,7 +70,13 @@ vim.keymap.set('n', '<leader>pWs', function()
     local word = vim.fn.expand("<cWORD>")
     builtin.grep_string({ search = word })
 end)
-vim.keymap.set('n', '<leader>PS', builtin.live_grep, { desc = 'Telescope live grep' })
+vim.keymap.set('n', '<leader>PS', function()
+    builtin.live_grep({
+        additional_args = function()
+            return { "--pcre2" } --enables search pattern capability
+        end
+    })
+end, { desc = 'Telescope live grep' })
 vim.keymap.set('n', '<leader>pS', function()
     builtin.grep_string({
         search = vim.fn.input("Grep > "),
