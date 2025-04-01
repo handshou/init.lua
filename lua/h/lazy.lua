@@ -15,6 +15,10 @@ vim.g.mapleader = " "
 
 local plugin = {
     {
+        'Exafunction/codeium.vim',
+        event = 'BufEnter'
+    },
+    {
         "folke/trouble.nvim",
         opts = {
             use_diagnostic_signs = true,
