@@ -19,6 +19,14 @@ vim.keymap.set("n", "<leader>Y", [["+Y]])
 
 vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
+vim.keymap.set("v", "<leader>f", function()
+    vim.lsp.buf.format({
+        filter = function(client)
+            return client.name == "biome"
+        end,
+        async = true,
+    })
+end, { desc = "Format with Biome" })
 vim.keymap.set("n", "<leader>f", function()
     vim.lsp.buf.format({
         filter = function(client)
