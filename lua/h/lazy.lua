@@ -15,6 +15,25 @@ vim.g.mapleader = " "
 
 local plugin = {
     {
+        "nvimdev/indentmini.nvim",
+        config = function()
+            require("indentmini").setup() -- use default config
+        end,
+    },
+    {
+        "nvimtools/none-ls.nvim",
+        event = { "BufEnter", "BufReadPre" },
+        dependencies = { "nvim-lua/plenary.nvim" },
+        config = function()
+            local null_ls = require("null-ls")
+            null_ls.setup({
+                sources = {
+                    null_ls.builtins.diagnostics.flake8,
+                },
+            })
+        end
+    },
+    {
         'Exafunction/codeium.nvim',
         dependencies = {
             "nvim-lua/plenary.nvim",
@@ -135,18 +154,33 @@ local plugin = {
 
         opts = {},
     },
-    "stevearc/conform.nvim",
-    opts = {
-        formatters_by_ft = {
-            lua = { "stylua" },
-            ["astro"] = { "biome-check" },
-            ["javascript"] = { "biome-check" },
-            ["javascriptreact"] = { "biome-check" },
-            ["typescript"] = { "biome-check" },
-            ["typescriptreact"] = { "biome-check" },
-            ["json"] = { "biome-check" },
-            ["css"] = { "biome-check" },
-        },
+    {
+        "stevearc/conform.nvim",
+        opts = {
+            formatters_by_ft = {
+                lua = { "stylua" },
+                ["astro"] = { "biome-check" },
+                ["javascript"] = { "biome-check" },
+                ["javascriptreact"] = { "biome-check" },
+                ["typescript"] = { "biome-check" },
+                ["typescriptreact"] = { "biome-check" },
+                ["json"] = { "biome-check" },
+                ["css"] = { "biome-check" },
+                python = { "black", "isort" },
+            },
+            formatters = {
+                ["biome-check"] = {},
+                isort = {
+                    command = ".venv/bin/isort",
+                },
+                black = {
+                    -- Use relative path so it's always correct for current project
+                    command = ".venv/bin/black",
+                    args = { "-" },
+                    stdin = true,
+                },
+            },
+        }
     },
     {
         "ThePrimeagen/harpoon",
@@ -177,14 +211,14 @@ local plugin = {
     {
         "nvim-telescope/telescope.nvim",
         opts = function(_, opts)
-        local actions = require("telescope.actions")
-          opts.defaults = {
-            mappings = {
-              i = {
-                ["<c-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
-              },
-            },
-          }
+            local actions = require("telescope.actions")
+            opts.defaults = {
+                mappings = {
+                    i = {
+                        ["<c-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+                    },
+                },
+            }
         end,
         -- tag = "0.1.4",
         -- or                            , branch = '0.1.x',
