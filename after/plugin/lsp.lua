@@ -7,6 +7,7 @@ lsp.ensure_installed({
     'eslint',
     'lua_ls',
     'rust_analyzer',
+    'pyright',
 })
 
 -- Fix Undefined global 'vim'
@@ -16,6 +17,14 @@ lsp.configure('lua-language-server', {
             diagnostics = {
                 globals = { 'vim' }
             }
+        }
+    }
+})
+
+lsp.configure('pyright', {
+    settings = {
+        python = {
+            pythonPath = "./.venv/bin/python"
         }
     }
 })
