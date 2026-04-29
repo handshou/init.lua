@@ -91,3 +91,8 @@ vim.keymap.set('n', '<leader>en', function()
     })
 end, {})
 vim.keymap.set('n', '<leader>vh', builtin.help_tags, {})
+vim.keymap.set('n', '<leader>pg', function()
+  require('telescope.builtin').find_files({
+    search_dirs = vim.fn.systemlist('git diff --name-only --merge-base main HEAD')
+  })
+end, { desc = 'Git diff files (merge-base main)' })
