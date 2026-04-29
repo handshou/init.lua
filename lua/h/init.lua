@@ -8,6 +8,11 @@ vim.g.netrw_winsize = 25
 vim.g.netrw_liststyle = 3
 vim.g.codeium_enabled = true
 
+vim.opt.list = true
+vim.opt.listchars = {
+  eol = '↩',
+}
+
 -- Define the function in Lua
 local function netrw_highlight_file()
     if vim.g.netrw_cursor_restore then
