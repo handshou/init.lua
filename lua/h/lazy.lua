@@ -272,7 +272,9 @@ local plugin = {
     },
     {
         "davidmh/mdx.nvim",
-        config = true,
+        config = function()
+            require("mdx").setup()
+        end,
         dependencies = { "nvim-treesitter/nvim-treesitter" },
     },
     {
