@@ -206,52 +206,36 @@ local plugin = {
         end,
     },
 
-    "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
-    "nvim-treesitter/playground",
+    { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
     "mbbill/undotree",
     "tpope/vim-fugitive",
     "nvim-treesitter/nvim-treesitter-context",
 
+    -- LSP Support
+    { "williamboman/mason.nvim", config = true },
     {
-        "VonHeikemen/lsp-zero.nvim",
-        branch = "v1.x",
-        dependencies = {
-            -- LSP Support
-            { "williamboman/mason.nvim" },
-            { "williamboman/mason-lspconfig.nvim" }, -- Optional
-            { "neovim/nvim-lspconfig" },             -- Required
-
-            -- Autocompletion
-            { "hrsh7th/nvim-cmp" },         -- Required
-            { "hrsh7th/cmp-nvim-lsp" },     -- Required
-            { "hrsh7th/cmp-buffer" },       -- Optional
-            { "hrsh7th/cmp-path" },         -- Optional
-            { "saadparwaiz1/cmp_luasnip" }, -- Optional
-            { "hrsh7th/cmp-nvim-lua" },     -- Optional
-
-            -- Snippets
-            { "L3MON4D3/LuaSnip" },             -- Required
-            { "rafamadriz/friendly-snippets" }, -- Optional
-        },
-
+        "williamboman/mason-lspconfig.nvim",
+        dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
         config = function()
-            -- Configure Mason and LSP handlers
-            require("mason").setup()
             require("mason-lspconfig").setup({
-                ensure_installed = { "biome" },
-            })
-
-            require("mason-lspconfig").setup_handlers({
-                ["biome"] = function()
-                    require("lspconfig").biome.setup({
-                        cmd = { "biome", "lsp-proxy" },
-                        filetypes = { "javascript", "typescript", "json", "css", "scss", "html", "markdown", "yaml" },
-                        root_dir = require("lspconfig.util").root_pattern(".biomeconfig.json", "package.json"),
-                    })
-                end,
+                ensure_installed = { "ts_ls", "eslint", "lua_ls", "rust_analyzer", "pyright", "biome" },
             })
         end,
+    },
+    { "neovim/nvim-lspconfig" },
+
+    -- Autocompletion
+    {
+        "hrsh7th/nvim-cmp",
+        dependencies = {
+            { "hrsh7th/cmp-nvim-lsp" },
+            { "hrsh7th/cmp-buffer" },
+            { "hrsh7th/cmp-path" },
+            { "saadparwaiz1/cmp_luasnip" },
+            { "hrsh7th/cmp-nvim-lua" },
+            { "L3MON4D3/LuaSnip" },
+            { "rafamadriz/friendly-snippets" },
+        },
     },
 
     "folke/zen-mode.nvim",
@@ -272,9 +256,6 @@ local plugin = {
     },
     {
         "davidmh/mdx.nvim",
-        config = function()
-            require("mdx").setup()
-        end,
         dependencies = { "nvim-treesitter/nvim-treesitter" },
     },
     {

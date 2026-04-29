@@ -1,67 +1,61 @@
-require'nvim-treesitter.configs'.setup {
-  -- A list of parser names, or "all" (the five listed parsers should always be installed)
-  ensure_installed = { "javascript", "typescript", "c", "lua" },
+-- Treesitter configuration for Neovim 0.11+
 
-  -- Install parsers synchronously (only applied to `ensure_installed`)
-  sync_install = false,
+-- Ensure parsers are installed
+vim.treesitter.language.register('markdown', 'mdx')
 
-  -- Automatically install missing parsers when entering buffer
-  -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-  auto_install = true,
+-- Basic highlight settings (treesitter highlight is enabled by default in 0.11+)
+vim.api.nvim_create_autocmd('FileType', {
+    callback = function()
+        pcall(vim.treesitter.start)
+    end,
+})
 
-  highlight = {
-    enable = true,
-
-    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-    -- Using this option may slow down your editor, and you may see some duplicate highlights.
-    -- Instead of true it can also be a list of languages
-    additional_vim_regex_highlighting = false,
-  },
-  textobjects = {
-    select = {
-      enable = true,
-      lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
-      keymaps = {
-        -- You can use the capture groups defined in textobjects.scm
-        ['aa'] = '@parameter.outer',
-        ['ia'] = '@parameter.inner',
-        ['af'] = '@function.outer',
-        ['if'] = '@function.inner',
-        ['ac'] = '@class.outer',
-        ['ic'] = '@class.inner',
-        ['ii'] = '@conditional.inner',
-        ['ai'] = '@conditional.outer',
-        ['il'] = '@loop.inner',
-        ['al'] = '@loop.outer',
-        ['at'] = '@comment.outer',
-      },
-    },
-    move = {
-      enable = true,
-      set_jumps = true, -- whether to set jumps in the jumplist
-      goto_next_start = {
-        [']m'] = '@function.outer',
-        [']]'] = '@class.outer',
-      },
-      goto_next_end = {
-        [']M'] = '@function.outer',
-        [']['] = '@class.outer',
-      },
-      goto_previous_start = {
-        ['[m'] = '@function.outer',
-        ['[['] = '@class.outer',
-      },
-      goto_previous_end = {
-        ['[M'] = '@function.outer',
-        ['[]'] = '@class.outer',
-      },
-      -- goto_next = {
-      --   [']i'] = "@conditional.inner",
-      -- },
-      -- goto_previous = {
-      --   ['[i'] = "@conditional.inner",
-      -- }
-    },
-  },
-}
+-- Textobjects configuration (if nvim-treesitter-textobjects is installed)
+local ok, ts_configs = pcall(require, 'nvim-treesitter.configs')
+if ok then
+    ts_configs.setup({
+        ensure_installed = { "javascript", "typescript", "c", "lua", "python", "rust" },
+        sync_install = false,
+        auto_install = true,
+        highlight = { enable = true },
+        textobjects = {
+            select = {
+                enable = true,
+                lookahead = true,
+                keymaps = {
+                    ['aa'] = '@parameter.outer',
+                    ['ia'] = '@parameter.inner',
+                    ['af'] = '@function.outer',
+                    ['if'] = '@function.inner',
+                    ['ac'] = '@class.outer',
+                    ['ic'] = '@class.inner',
+                    ['ii'] = '@conditional.inner',
+                    ['ai'] = '@conditional.outer',
+                    ['il'] = '@loop.inner',
+                    ['al'] = '@loop.outer',
+                    ['at'] = '@comment.outer',
+                },
+            },
+            move = {
+                enable = true,
+                set_jumps = true,
+                goto_next_start = {
+                    [']m'] = '@function.outer',
+                    [']]'] = '@class.outer',
+                },
+                goto_next_end = {
+                    [']M'] = '@function.outer',
+                    [']['] = '@class.outer',
+                },
+                goto_previous_start = {
+                    ['[m'] = '@function.outer',
+                    ['[['] = '@class.outer',
+                },
+                goto_previous_end = {
+                    ['[M'] = '@function.outer',
+                    ['[]'] = '@class.outer',
+                },
+            },
+        },
+    })
+end
