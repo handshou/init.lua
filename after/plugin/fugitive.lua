@@ -1,4 +1,21 @@
 vim.keymap.set("n", "<leader>gs", vim.cmd.Git);
+vim.keymap.set("n", "<leader>gv", "<cmd>Gvdiffsplit!<CR>")
+
+-- Dotfiles bare repo commands (~/.cfg)
+local cfg_git = 'git --git-dir=$HOME/.cfg --work-tree=$HOME '
+
+vim.keymap.set("n", "<leader>gS", function()
+  vim.cmd('!' .. cfg_git .. 'status')
+end, { desc = "Config status" })
+
+vim.keymap.set("n", "<leader>gD", function()
+  vim.cmd('!' .. cfg_git .. 'diff')
+end, { desc = "Config diff" })
+
+vim.api.nvim_create_user_command('Config', function(opts)
+  local args = opts.args ~= '' and opts.args or 'status'
+  vim.cmd('!' .. cfg_git .. args)
+end, { nargs = '*' })
 
 local ThePrimeagen_Fugitive = vim.api.nvim_create_augroup("ThePrimeagen_Fugitive", {})
 
