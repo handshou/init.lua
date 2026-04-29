@@ -34,13 +34,6 @@ local plugin = {
         end
     },
     {
-        'Exafunction/codeium.nvim',
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            "hrsh7th/nvim-cmp",
-        },
-    },
-    {
         'jinh0/eyeliner.nvim',
         config = function()
             require 'eyeliner'.setup {
