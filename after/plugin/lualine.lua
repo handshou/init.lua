@@ -4,7 +4,7 @@ require('lualine').setup {
         theme = "tokyonight",
         icons_enabled = true,
         globalstatus = true,
-        component_separators = { left = "", right = "" },
+        component_separators = { left = "|", right = "|" },
         section_separators = { left = "█", right = "█" },
     },
     sections = {
@@ -31,7 +31,8 @@ require('lualine').setup {
         lualine_y = {
         },
         lualine_z = {
-            'location'
+            'progress',
+            'location',
         },
     },
     tabline = {
