@@ -41,8 +41,7 @@ vim.keymap.set("n", "<leader>F", function()
     })
 end, { desc = "Format with Conform" })
 
-vim.keymap.set("n", "\u{AA}", "<cmd>cnext<CR>zz")
-vim.keymap.set("n", "\u{AB}", "<cmd>cprev<CR>zz")
+-- quickfix nav (ª/« = Cmd+J/Cmd+K) lives in after/plugin/fugitive.lua: qf_diff_nav
 vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
