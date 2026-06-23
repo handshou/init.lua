@@ -47,6 +47,10 @@ Commonly used hotkeys for commonly used applications.
 | LDR-p | push |
 |LDR-P | pull —rebase |
 |LDR-t | push -u origin |
+| LDR-gv | vertical diff split (vs index) |
+| LDR-gV | vertical diff vs merge-base main |
+| LDR-pg | telescope: files changed vs main |
+| Cmd-J / Cmd-K | quickfix next/prev; while reviewing a diff, rebuild merge-base diff on each entry |
 
 ### netrw
 | Key | Description |
