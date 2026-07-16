@@ -218,7 +218,7 @@ local plugin = {
         dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
         config = function()
             require("mason-lspconfig").setup({
-                ensure_installed = { "ts_ls", "eslint", "lua_ls", "rust_analyzer", "pyright", "biome" },
+                ensure_installed = { "ts_ls", "eslint", "lua_ls", "rust_analyzer", "basedpyright", "ruff", "biome" },
             })
         end,
     },

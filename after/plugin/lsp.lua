@@ -11,12 +11,17 @@ vim.lsp.config('lua_ls', {
     }
 })
 
-vim.lsp.config('pyright', {
-    settings = {
-        python = {
-            pythonPath = "./.venv/bin/python"
-        }
-    }
+-- Reads [tool.basedpyright] from the root pyproject.toml, so diagnostics match
+-- the project's own typecheck. Interpreter resolves to <root>/.venv per workspace.
+vim.lsp.config('basedpyright', {
+    before_init = function(_, config)
+        local venv_python = config.root_dir and (config.root_dir .. '/.venv/bin/python')
+        if venv_python and vim.fn.executable(venv_python) == 1 then
+            config.settings = vim.tbl_deep_extend('force', config.settings or {}, {
+                python = { pythonPath = venv_python },
+            })
+        end
+    end,
 })
 
 vim.lsp.config('biome', {
@@ -25,7 +30,7 @@ vim.lsp.config('biome', {
 })
 
 -- Enable LSP servers
-vim.lsp.enable({ 'ts_ls', 'eslint', 'lua_ls', 'rust_analyzer', 'pyright', 'biome' })
+vim.lsp.enable({ 'ts_ls', 'eslint', 'lua_ls', 'rust_analyzer', 'basedpyright', 'ruff', 'biome' })
 
 -- Keymaps on LSP attach
 vim.api.nvim_create_autocmd('LspAttach', {
