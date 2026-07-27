@@ -7,6 +7,28 @@ vim.keymap.set("n", "<leader>gV", function()
   vim.cmd("Gvdiffsplit " .. base)
 end, { desc = "Vertical diff vs merge-base main" })
 
+-- load every file changed vs merge-base main (incl. working tree) into the
+-- quickfix list and open the first diff; Cmd+J/Cmd+K then walk the list
+vim.keymap.set("n", "<leader>gq", function()
+  local base = vim.fn.systemlist("git merge-base main HEAD")[1]
+  if vim.v.shell_error ~= 0 then
+    vim.cmd("Git difftool --name-only") -- no main branch; diff vs HEAD
+    return
+  end
+  vim.cmd("Git difftool --name-only " .. base)
+  -- difftool misses untracked files; append them to the list
+  local untracked = vim.fn.systemlist("git ls-files --others --exclude-standard")
+  if #untracked > 0 then
+    vim.fn.setqflist(vim.tbl_map(function(f)
+      return { filename = f, lnum = 1, text = "untracked" }
+    end, untracked), "a")
+  end
+  -- new files have no base blob to diff against; plain buffer is fine
+  if pcall(vim.cmd, "Gvdiffsplit " .. base) then
+    vim.cmd("normal! zRzz")
+  end
+end, { desc = "Quickfix: all files changed vs merge-base main" })
+
 -- true when a fugitive git-blob window is open (i.e. we're in a diff review)
 local function find_fugitive_win()
   for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
@@ -46,8 +68,10 @@ local function qf_diff_nav(motion)
   end
 
   vim.cmd(motion) -- cnext / cprev loads the next file into this window
-  vim.cmd("Gvdiffsplit " .. base)
-  vim.cmd("normal! zRzz") -- open folds so changes show, then center
+  -- pcall: new/untracked files have no blob at base; just show the buffer
+  if pcall(vim.cmd, "Gvdiffsplit " .. base) then
+    vim.cmd("normal! zRzz") -- open folds so changes show, then center
+  end
 end
 
 vim.keymap.set("n", "\u{AA}", function() qf_diff_nav("cnext") end, { desc = "QF next (+ rebuild diff in review)" })
