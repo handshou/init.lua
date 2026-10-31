@@ -162,22 +162,27 @@ local plugin = {
         },
     },
     {
-        "christoomey/vim-tmux-navigator",
-        cmd = {
-            "TmuxNavigateLeft",
-            "TmuxNavigateDown",
-            "TmuxNavigateUp",
-            "TmuxNavigateRight",
-            "TmuxNavigatePrevious",
+        "smart-splits-nvim/smart-splits.nvim",
+        version = "^3.0.0",
+        lazy = false,
+        dependencies = {
+            { "adriankarlen/smart-splits-backend-herdr", main = "smart-splits-backend-herdr", opts = {} },
+            { "rawnly/smart-splits-backend-rex", main = "smart-splits-backend-rex", opts = {} },
+            { "smart-splits-nvim/backend-tmux", main = "smart-splits-backend-tmux", opts = {} },
+        },
+        opts = {
+            move = { at_edge = "stop" },
+            mux = {
+                backend = { "smart-splits-backend-tmux", "smart-splits-backend-herdr", "smart-splits-backend-rex" },
+            },
         },
         keys = {
-            { "<c-h>",  "<cmd><C-U>TmuxNavigateLeft<cr>" },
-            { "<c-j>",  "<cmd><C-U>TmuxNavigateDown<cr>" },
-            { "<c-k>",  "<cmd><C-U>TmuxNavigateUp<cr>" },
-            { "<c-l>",  "<cmd><C-U>TmuxNavigateRight<cr>" },
-            { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
+            { "<C-h>", function() require("smart-splits").move_cursor_left() end, desc = "Navigate left (Vim/mux)" },
+            { "<C-j>", function() require("smart-splits").move_cursor_down() end, desc = "Navigate down (Vim/mux)" },
+            { "<C-k>", function() require("smart-splits").move_cursor_up() end, desc = "Navigate up (Vim/mux)" },
+            { "<C-l>", function() require("smart-splits").move_cursor_right() end, desc = "Navigate right (Vim/mux)" },
+            { "<C-\\>", "<C-w>p", desc = "Navigate to previous Vim window" },
         },
-        lazy = false,
     },
     {
         "nvim-telescope/telescope.nvim",
