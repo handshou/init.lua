@@ -228,6 +228,7 @@ local plugin = {
         end,
     },
     { "neovim/nvim-lspconfig" },
+    { "dmmulroy/ts-error-translator.nvim", opts = {} },
 
     -- Autocompletion
     {
