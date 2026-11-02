@@ -26,7 +26,6 @@ require('lualine').setup {
             }
         },
         lualine_x = {
-            { function() return vim.fn['codeium#GetStatusString']() end, color = { fg = '#ff9e64' } }
         },
         lualine_y = {
         },

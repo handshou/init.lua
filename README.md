@@ -27,7 +27,6 @@ Commonly used hotkeys for commonly used applications.
 | :Ex | explorer pane |
 | :ls | list all buffers |
 | :so | reload source |
-| :TSPlaygroundToggle | AST inside editor from treesitter |
 |C-a-1 | increment 1 after cursor  |
 |C-x-1 | decrement 1 after cursor  |
 |1-j | move cursor 1 row down  |
